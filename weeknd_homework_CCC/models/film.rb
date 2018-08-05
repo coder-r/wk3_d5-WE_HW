@@ -1,5 +1,6 @@
 require_relative('../db/sql_runner')
 
+
 class Film
 
   attr_reader :id
@@ -50,15 +51,15 @@ class Film
     SqlRunner.run(sql)
   end
 
-  def stars()
-  sql = "SELECT stars.*
-  FROM stars
-  INNER JOIN castings
-  ON stars.id = castings.star_id
-  WHERE castings.movie_id = $1"
+  def customers_coming()
+  sql = "SELECT customers.*
+  FROM customers
+  INNER JOIN tickets
+  ON customers.id = tickets.customer_id
+  WHERE tickets.film_id = $1"
   values = [@id]
   results = SqlRunner.run(sql, values)
-  return results.map { |star_hash| Stars.new(star_hash) }
+  return results.map { |customer_hash| Customer.new(customer_hash) }
   end
 
 end

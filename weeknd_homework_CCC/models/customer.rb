@@ -1,9 +1,11 @@
 require_relative('../db/sql_runner')
 
 
+
 class Customer
 
-  attr_accessor :id
+  attr_reader :id
+  attr_accessor :name, :funds
 
   def initialize(options)
 
@@ -57,15 +59,19 @@ class Customer
     SqlRunner.run(sql)
   end
 
-  def find_movies()
-    sql = "SELECT movies.*
-    FROM movies
-    INNER JOIN castings
-    ON movies.id = castings.movie_id
-    WHERE castings.star_id = $1"
+  def find_cust_booked()
+    sql = "SELECT films.*
+    FROM customers
+    INNER JOIN tickets
+    ON films.id = tickets.movie_id
+    WHERE tickets.customer_id = $1"
     values = [@id]
     result = SqlRunner.run(sql, values)
-    return result.map { |movie_hash| Movies.new(movie_hash)}
+    return result.map { |film_hash| Film.new(movie_hash)}
   end
+
+  # THIS METHOD SHOWS WHICH FILM A CUSTOMER HAS BOOKED TO SEE
+
+
 
 end

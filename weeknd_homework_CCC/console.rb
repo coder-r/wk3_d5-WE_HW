@@ -5,9 +5,9 @@ require_relative("models/ticket.rb")
 require( 'pry-byebug' )
 
 
-Ticket.delete_all()
-Customer.delete_all()
-Film.delete_all()
+# Ticket.delete_all()
+# Customer.delete_all()
+# Film.delete_all()
 
 customer1 = Customer.new({ 'name' => 'Rameez', 'funds' => '20'} )
 customer1.save()
